@@ -7,7 +7,6 @@ describe Birdbraino::Bot do
       mentionless: '\n 1 \n 2 \n 3 \n 4',
       reply_prefix: '@birdbraino '
     })
-    # allow(Birdbraino::Mention).to receive(:new).and_return(mention)
     allow_any_instance_of(Birdbraino::Bot).to receive(:meta).and_return(metatweet)
 
     response = double('response')
@@ -28,14 +27,14 @@ describe Birdbraino::Bot do
     allow(Tempfile).to receive(:new).and_return(tempfile)
     allow(Birdbraino::Image).to receive(:new).and_call_original
     allow_any_instance_of(Birdbraino::Image).to receive(:download).and_return('/tmp/somefile')
-    # allow(Birdbraino::Bot).to receive(:pictweet).and_return(true)
-
+    allow_any_instance_of(Birdbraino::Bot).to receive(:pictweet)
   end
 
-  it 'hfghgf' do
+  it 'goes from text to image' do
+    expect_any_instance_of(Birdbraino::Bot).to receive(:pictweet)
+
     tweet = double('tweet')
     test_bot = Birdbraino::Bot.new('birdbraino_test')
     test_bot.on_mention(tweet)
-
   end
 end
