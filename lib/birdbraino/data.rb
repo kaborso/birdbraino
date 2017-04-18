@@ -1,7 +1,7 @@
 module Birdbraino
   class Data
     def initialize(tweet_text)
-      lines = tweet_text.split('\n')
+      lines = tweet_text.split("\n")
       @brains = {brains: lines}
     end
 
