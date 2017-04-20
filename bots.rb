@@ -14,10 +14,15 @@ module Birdbraino
     end
 
     def on_mention(tweet)
-      api = Api.new(host:ENV['BIRDBRAINO_HOST'])
-      mention = Mention.new(meta(tweet).reply_prefix, meta(tweet).mentionless)
-      api.meme(tweet_text: mention.text) do |path|
-        pictweet(mention.user, path)
+      begin
+        api = Api.new(host: ENV['BIRDBRAINO_HOST'])
+        mention = Mention.new(meta(tweet).reply_prefix, meta(tweet).mentionless)
+        api.meme(tweet_text: mention.text) do |path|
+          pictweet(mention.user, path)
+        end
+      rescue => e
+        log e.message
+        reply(tweet, meta(tweet).reply_prefix + "An error occurred while preparing your image. /cc @kaborso")
       end
     end
   end

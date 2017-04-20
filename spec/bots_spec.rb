@@ -26,13 +26,21 @@ describe Birdbraino::Bot do
     })
     allow(Tempfile).to receive(:new).and_return(tempfile)
     allow(Birdbraino::Image).to receive(:new).and_call_original
-    allow_any_instance_of(Birdbraino::Image).to receive(:download).and_return('/tmp/somefile')
+    allow_any_instance_of(Birdbraino::Image).to receive(:download) { |&block| block.call('/tmp/somefile') }
     allow_any_instance_of(Birdbraino::Bot).to receive(:pictweet)
   end
 
   it 'goes from text to image' do
     expect_any_instance_of(Birdbraino::Bot).to receive(:pictweet)
 
+    tweet = double('tweet')
+    test_bot = Birdbraino::Bot.new('birdbraino_test')
+    test_bot.on_mention(tweet)
+  end
+
+  it 'handles errors' do
+    allow_any_instance_of(Birdbraino::Api).to receive(:meme).and_raise(StandardError)
+    expect_any_instance_of(Birdbraino::Bot).to receive(:reply)
     tweet = double('tweet')
     test_bot = Birdbraino::Bot.new('birdbraino_test')
     test_bot.on_mention(tweet)
