@@ -27,8 +27,8 @@ module Birdbraino
     end
 
     def save(image_name, image_url, &block)
-      @image = Image.new(image_name, image_url)
-      @image.download(&block)
+      image = Image.new(image_name, image_url)
+      image.download(&block)
     end
   end
 end
