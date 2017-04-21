@@ -8,8 +8,8 @@ ENV['TZ'] = 'America/New_York'
 module Birdbraino
   class Bot < Ebooks::Bot
     def configure
-      self.consumer_key = ENV['BIRDBRAIND_CONSUMER_KEY'] # Your app consumer key
-      self.consumer_secret = ENV['BIRDBRAIND_CONSUMER_SECRET'] # Your app consumer secret
+      self.consumer_key = ENV['BIRDBRAINO_CONSUMER_KEY'] # Your app consumer key
+      self.consumer_secret = ENV['BIRDBRAINO_CONSUMER_SECRET'] # Your app consumer secret
       self.delay_range = 1..6
     end
 
@@ -29,6 +29,6 @@ module Birdbraino
 end
 
 Birdbraino::Bot.new("birdbraino") do |bot|
-  bot.access_token = ENV['BIRDBRAIND_ACCESS_TOKEN'] # Token connecting the app to this account
-  bot.access_token_secret = ENV['BIRDBRAIND_ACCESS_SECRET'] # Secret connecting the app to this account
+  bot.access_token = ENV['BIRDBRAINO_ACCESS_TOKEN'] # Token connecting the app to this account
+  bot.access_token_secret = ENV['BIRDBRAINO_ACCESS_SECRET'] # Secret connecting the app to this account
 end
