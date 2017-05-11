@@ -8,3 +8,8 @@ group :test do
   gem 'rspec', '3.5.0'
   gem 'simplecov', require: false
 end
+
+group :development do
+  gem 'guard-rspec', require: false
+  gem 'guard', require: false
+end
