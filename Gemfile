@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.4.1'
 
 gem 'twitter_ebooks', '3.1.6'
 gem 'rest-client', '2.0.1'
