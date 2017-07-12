@@ -14,4 +14,4 @@
 - [ ] Turn image(s) into panel(s)
 - [ ] Mix images, text, and quote panels
 ## Bugs
-- [ ] Responds to any mention (should only reply to direct, unthreaded mentions)
+- [x] Should not reply to every mention (only direct, unthreaded mentions)

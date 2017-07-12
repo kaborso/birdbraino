@@ -15,10 +15,15 @@ module Birdbraino
 
     def on_mention(tweet)
       begin
-        api = Api.new(host: ENV['BIRDBRAINO_HOST'])
-        mention = Mention.new(meta(tweet).reply_prefix, meta(tweet).mentionless)
-        api.meme(tweet_text: mention.text) do |path|
-          pictweet(mention.user, path)
+        metatweet = meta(tweet)
+        if metatweet.mentions_bot? && tweet.in_reply_to_status_id.nil?
+          api = Api.new(host: ENV['BIRDBRAINO_HOST'])
+          mention = Mention.new(metatweet.reply_prefix, metatweet.mentionless)
+          api.meme(tweet_text: mention.text) do |path|
+            pictweet(mention.user, path)
+          end
+        else
+          log "Not replying (indirect mention): #{tweet.text}"
         end
       rescue => e
         log e.message
